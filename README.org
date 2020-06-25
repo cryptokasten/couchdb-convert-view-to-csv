@@ -1,0 +1,43 @@
+#+TITLE: Convert view to csv
+#+PROPERTY: header-args:sh :session *shell couchdb-convert-view-to-csv sh* :results silent raw
+#+PROPERTY: header-args:python :session *shell couchdb-convert-view-to-csv python* :results silent raw
+#+OPTIONS: ^:nil
+
+** Example view result json
+
+#+BEGIN_SRC js :tangle data/view.json
+{
+    "rows":[
+	{"key":"000","value":4},
+	{"key":"001","value":2},
+	{"key":"002","value":2},
+	{"key":"003","value":2},
+	{"key":"004","value":2}
+    ]
+}
+#+END_SRC
+
+Save it to the =data/view.json=.
+
+** Imports
+
+#+BEGIN_SRC python :tangle src/couchdb_view_to_csv.py
+import json
+import csv
+#+END_SRC
+
+** Load json
+
+#+BEGIN_SRC python :tangle src/couchdb_view_to_csv.py
+f = open("data/view.json", "rt")
+data = json.loads(f.read())
+#+END_SRC
+
+** Write data to the csv file
+
+#+BEGIN_SRC python :tangle src/couchdb_view_to_csv.py
+f = open("data/view.csv", "w", newline="")
+writer = csv.DictWriter(f, data["rows"][0].keys())
+writer.writerows(data["rows"])
+f.close()
+#+END_SRC
