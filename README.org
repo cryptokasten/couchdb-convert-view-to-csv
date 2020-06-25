@@ -1,4 +1,4 @@
-#+TITLE: Convert view to csv
+#+TITLE: CouchDB: convert view to csv
 #+PROPERTY: header-args:sh :session *shell couchdb-convert-view-to-csv sh* :results silent raw
 #+PROPERTY: header-args:python :session *shell couchdb-convert-view-to-csv python* :results silent raw
 #+OPTIONS: ^:nil
